@@ -1,0 +1,594 @@
+/**
+  * The main CSS file for the application
+  *
+  * NOTES:
+  * For the purpose of this project, all styles are currently added here for simplicity.
+  * Apart from the base styles, such as variables and setup, a component-based
+  * approach is still used, so they could easily be extracted to separate files.
+  */
+
+/* ------------------ */
+/* Setup */
+/* ------------------ */
+
+/* Variables */
+
+:root {
+  /* Spacing */
+  --spacing-xsmall: 4px;
+  --spacing-small: 8px;
+  --spacing-medium: 16px;
+  --spacing-large: 24px;
+  --spacing-xlarge: 32px;
+
+  /* Radius */
+  --radius-small: 4px;
+  --radius-medium: 8px;
+
+  /* Typography */
+  --font-size-small: 14px;
+  --font-size-medium: 16px;
+  --font-size-large: 18px;
+  --font-size-xlarge: 26px;
+
+  /* Colors */
+
+  --color-text-1: #303030;
+  --color-text-2: #eaeaea;
+  --color-accent-1: #ff9b31;
+  --color-border-1: #dadada;
+  --color-background-1: #f6f6f6;
+  --color-background-2: #f0f0f0;
+  --color-background-3: #e0e0e0;
+  --color-background-4: #303030;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--color-background-1);
+  color: var(--color-text-1);
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: var(--color-accent-1);
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+figure {
+  margin: 0;
+}
+
+/* Typography */
+
+h1, h2, h3, h4, h5, h6, p, span {
+  margin: 0;
+  line-height: 1.4;
+}
+
+.main-title {
+  margin: 0;
+  font-size: var(--font-size-xlarge);
+
+  span {
+    margin-left: var(--spacing-small);
+    font-size: var(--font-size-large);
+  }
+}
+
+/* Buttons */
+
+button {
+  transition: opacity 0.2s;
+  border: 0;
+  background-color: transparent;
+  cursor: pointer;
+  padding: 0;
+  color: var(--text-color-1);
+
+  &:hover {
+    opacity: 0.8;
+  }
+
+  &:active {
+    opacity: 0.5;
+  }
+
+  &[disabled] {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+}
+
+.button {
+  border-radius: var(--radius-small);
+  background-color: var(--color-accent-1);
+  padding: var(--spacing-medium) var(--spacing-large);
+  text-align: center;
+  color: var(--color-text-1);
+  font-size: var(--font-size-medium);
+
+  &.button-neutral {
+    background-color: var(--color-background-4);
+    color: var(--color-text-2);
+  }
+}
+
+/* Button styled link */
+
+a.button {
+  transition: opacity 0.2s;
+
+  &:hover {
+    opacity: 0.8;
+    text-decoration: none;
+  }
+}
+
+/* Link styled button */
+
+.button-link {
+  width: fit-content;
+  padding: var(--spacing-small);
+  padding: 0;
+  color: var(--color-text-1);
+  font-size: var(--font-size-medium);
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+/* ------------------ */
+/* Layout */
+/* ------------------ */
+
+#root {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  grid-template-columns: 1fr;
+  min-height: 100vh; /* Full height even when content is short (e.g empty) */
+  gap: var(--spacing-xlarge);
+}
+
+.header {
+  display: flex;
+  position: sticky;
+  top: 0;
+  align-items: center;
+  z-index: 10;
+  background-color: var(--color-background-2);
+  padding: var(--spacing-medium);
+
+  .logo {
+    width: 36px;
+    height: 36px;
+
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  .logo-link {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-small);
+    text-decoration: none;
+  }
+
+  .title {
+    color: var(--color-text-1);
+    font-size: var(--font-size-large);
+  }
+
+  .navigation {
+    margin-left: auto;
+  }
+}
+
+.navigation {
+  ul {
+    display: flex;
+    gap: var(--spacing-medium);
+  }
+
+  a {
+    color: var(--color-text-1);
+
+    &.active {
+      color: var(--color-accent-1);
+      font-weight: bold;
+    }
+
+    .count {
+      margin-left: var(--spacing-xsmall);
+      font-size: var(--font-size-small);
+    }
+  }
+}
+
+.footer {
+  margin-top: auto;
+  background-color: var(--color-background-2);
+  padding: var(--spacing-medium);
+  text-align: center;
+  font-size: var(--font-size-small);
+}
+
+/* ------------------ */
+/* Pages */
+/* ------------------ */
+
+.page {
+  margin-inline: auto;
+  width: 100%;
+  overflow: hidden;
+  padding-inline: var(--spacing-medium);
+}
+
+.favourites-page {
+  display: flex;
+  flex-flow: column ;
+
+  .clear-favourites {
+    display: block;
+    width: 100%;
+    text-align: right;
+  }
+}
+
+/* ------------------ */
+/* Utilities */
+/* ------------------ */
+
+.images-grid {
+  display: grid;
+  margin-block: var(--spacing-xlarge);
+  grid-template-columns: 1fr;
+  gap: var(--spacing-medium);
+}
+
+.modal-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--spacing-small);
+}
+
+.loading-grid {
+  display: grid; /* Use along with other grid classes for a complex grid or standalone */
+
+  .image-loading {
+    width: 100%;
+    border-radius: var(--radius-medium);
+    aspect-ratio: 1;
+  }
+}
+
+.image-loading {
+  animation: skeleton-loading 1.5s infinite ease-in-out;
+}
+
+.image-fallback {
+  filter: opacity(0.3) grayscale(0.8); /* Grayed out fallback image */
+}
+
+/* ------------------ */
+/* Modals */
+/* ------------------ */
+
+/* Modal Component */
+
+.modal-backdrop {
+  display: flex;
+  position: fixed;
+  align-items: flex-end;
+  justify-content: center;
+  z-index: 20; /* Above the page */
+  background: rgba(0, 0, 0, 0.5);
+  inset: 0;
+}
+
+.modal {
+  display: flex;
+  flex-flow: column;
+  width: 100%;
+  max-height: 90vh; /* Bottom drawer on mobile */
+  border-radius: var(--radius-medium);
+  background-color: var(--color-background-1);
+  overflow: hidden;
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--color-border-1);
+  padding: var(--spacing-large);
+  gap: var(--spacing-medium);
+
+  .modal-title {
+    margin: 0;
+    font-size: var(--font-size-large);
+  }
+
+  .modal-close-button {
+    margin-left: auto; /* Push the button to the right */
+  }
+}
+
+.modal-main {
+  height: 100%;
+  padding: var(--spacing-large);
+  overflow: auto;
+}
+
+/* Image Modal */
+
+.image-modal {
+  .image-card {
+    .image:not(.image-fallback) {
+      aspect-ratio: unset; /* Show original image ratio in modal */
+      max-width: 100%; /* Intrinsic size to avoid pixelation, restrict by allowed modal width */
+      max-height: 100%;
+    }
+  }
+
+  .breed-button {
+    display: block;
+    margin-top: var(--spacing-medium);
+  }
+}
+
+/* Breed Modal */
+
+.breed-modal {
+  display: flex;
+  flex-flow: column;
+  gap: var(--spacing-large);
+}
+
+/* ------------------ */
+/* UI Components */
+/* ------------------ */
+
+/* Toast Message */
+
+.toast-message {
+  position: fixed;
+  top: 60px; /* Below the header */
+  right: 0;
+  z-index: 30; /* Above the modal */
+  margin: var(--spacing-large);
+  border-radius: var(--radius-small);
+  background-color: var(--color-accent-1);
+  padding: var(--spacing-medium) var(--spacing-large);
+  color: var(--color-text-1);
+
+  .close-button {
+    padding: var(--spacing-small);
+  }
+}
+
+/* Load More */
+
+.load-more-section {
+  text-align: center;
+
+  .error-message {
+    margin-bottom: var(--spacing-medium);
+  }
+}
+
+/** Tag List Section */
+
+.tags-section {
+  display: flex;
+  gap: var(--spacing-small);
+  flex-wrap: wrap;
+  align-items: center;
+
+  .title {
+    margin: 0;
+  }
+
+  .tag {
+    width: fit-content;
+    height: fit-content;
+    border-radius: var(--radius-small);
+    background-color: var(--color-background-3);
+    padding: var(--spacing-small) var(--spacing-medium);
+
+    .remove {
+      margin-left: var(--spacing-small);
+    }
+  }
+}
+
+/* Empty Section */
+
+.empty-section {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  text-align: center;
+  font-weight: bold;
+  gap: var(--spacing-medium);
+
+  .title {
+    font-size: var(--font-size-large);
+  }
+
+  .emoji {
+    font-size: 40px;
+  }
+}
+
+/* ------------------ */
+/* Shared Components */
+/* ------------------ */
+
+/* Breed Details info */
+
+.breed-details {
+  display: flex;
+  flex-flow: column;
+  gap: var(--spacing-xsmall);
+
+  .name {
+    font-size: var(--font-size-large);
+  }
+
+  .description {
+    margin-top: var(--spacing-small);
+    font-size: var(--font-size-small);
+  }
+}
+
+/* Image Card */
+
+.image-card {
+  position: relative;
+  border-radius: var(--radius-medium);
+  overflow: hidden;
+
+  /* Actions (fav, share) */
+
+  .actions {
+    display: flex;
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    justify-content: flex-end;
+    z-index: 3;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8) 0%, transparent 100%);
+    padding: var(--spacing-small);
+  }
+
+  .action-button {
+    padding: var(--spacing-small);
+    color: var(--color-text-2);
+    font-size: 20px;
+  }
+
+  /* Image */
+
+  .image-wrapper {
+    position: relative;
+  }
+
+  .image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+  }
+
+  .image-caption {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 2;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, transparent 100%);
+    padding: var(--spacing-medium);
+    color: var(--color-text-2);
+    pointer-events: none; /* Allow showing over clickable area */
+  }
+
+  /* Make the whole card clickable (for either <a> or <button>) */
+
+  .clickable {
+    display: block;
+    position: absolute;
+    transition: opacity 0.2s ease-in-out;
+    opacity: 0;
+    z-index: 1;
+    background: rgba(200, 200, 200, 0.3);
+    cursor: pointer;
+    inset: 0;
+    mix-blend-mode: overlay;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+}
+
+/* ------------------ */
+/* Responsive */
+/* ------------------ */
+
+@media (min-width: 480px) {
+  .images-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .modal-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (min-width: 768px) {
+  .modal-backdrop {
+    align-items: center;
+  }
+
+  .modal {
+    max-width: 650px;
+  }
+
+  .images-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 1200px) {
+  .page {
+    max-width: 1400px;
+    padding-inline: var(--spacing-large);
+  }
+
+  .images-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* ------------------ */
+/* Keyframes */
+/* ------------------ */
+
+/* Skeleton animation */
+
+@keyframes skeleton-loading {
+  0% {
+    background-color: var(--color-background-3);
+  }
+
+  50% {
+    background-color: transparent;
+  }
+
+  100% {
+    background-color: var(--color-background-3);
+  }
+}
